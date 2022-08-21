@@ -6,7 +6,7 @@ WORKDIR /app
 
 ## Step 2:
 # Copy source code to working directory
-WORKDIR /app
+COPY . .
 
 ## Step 3:
 RUN python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt
