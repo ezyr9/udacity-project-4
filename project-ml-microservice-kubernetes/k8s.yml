@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: phuongtd-app
+spec:
+  containers:
+  - name: phuongtd-app
+    image: 798426491631.dkr.ecr.ap-southeast-1.amazonaws.com/udacity-project-4:latest
+  imagePullSecrets:
+  - name: phuongtd-secret-ecr
