@@ -36,15 +36,37 @@ source .devops/bin/activate
 ```
 * Run `make install` to install the necessary dependencies
 
-### Running `app.py`
+### Running Flask App
 
 1. Standalone:  `python app.py`
 2. Run in Docker:  `./run_docker.sh`
 3. Run in Kubernetes:  `./run_kubernetes.sh`
 
-### Kubernetes Steps
+### Steps
 
-* Setup and Configure Docker locally
-* Setup and Configure Kubernetes locally
-* Create Flask app in Container
-* Run via kubectl
+* Setup and Configure Docker locally (Use the WSL 2 based engine & WSL2)
+* Setup and Configure Kubernetes locally (Enable Kubernetes in Docker Desktop)
+* Create Amazon Elastic Container Registry (Amazon ECR)
+* Containerize Flask app
+* Pull and Push Docker image to Amazon Elastic Container Registry (Amazon ECR)
+
+### File Structure
+Folders
+```
+├── model_data: Include CSV file
+└── output_txt_files: Include two output text files: docker_out.txt and kubernetes_out.txt that include the log output after a prediction is made, given some sample input data
+```
+Files
+```
+├── app.py: Used to create Flask server application
+├── create_secret.sh: Used to create Secret for authenticate into AWS ECR in Kubernetes
+├── Dockerfile: Used to build Image (flask app) in Docker
+├── k8s.yml: Used to create Kubernetes Pod (flask app) in Kubernetes
+├── Makefile: Used to run Make command, includes instructions on environment setup and lint tests
+├── make_prediction.sh: Used to make prediction to flask app
+├── requirements.txt: Used to store dependencies for flask app
+├── run_docker.sh: Used to run flask app as Docker Container
+├── run_kubernetes.sh: Used to run flask app as Kubernetes Pod
+└── upload_docker.sh: Used to upload the built Docker image to Amazon Elastic Container Registry (Amazon ECR)
+```
+
