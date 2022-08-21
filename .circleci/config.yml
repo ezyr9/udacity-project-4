@@ -21,15 +21,16 @@ jobs:
       - checkout
 
       # Download and cache dependencies
-      # - restore_cache:
-      #     keys:
-      #     - v1-dependencies-{{ checksum "requirements.txt" }}
-      #     # fallback to using the latest cache if no exact match is found
-      #     - v1-dependencies-
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "requirements.txt" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
 
       - run:
           name: install dependencies
           command: |
+            cd project-ml-microservice-kubernetes/
             python3 -m venv venv
             . venv/bin/activate
             make install
@@ -44,11 +45,13 @@ jobs:
       - run:
           name: run tests
           command: |
+            cd project-ml-microservice-kubernetes/
             . venv/bin/activate
             make test
       # run lints!
       - run:
           name: run lint
           command: |
+            cd project-ml-microservice-kubernetes/
             . venv/bin/activate
             make lint
